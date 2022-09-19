@@ -1,27 +1,20 @@
 import React from "react";
 
 class CartItem extends React.Component {
-    constructor() {
-        super();
-        this.state = {
-            price: 999,
-            title: 'Phone',
-            qty: 1,
-            img: ''
-        }
-    }
-
-    increaseQty = () => {
-        this.setState( {
-            qty : this.state.qty + 1  
-        })
-    }
 
     render() {
-        const {price, title, qty} = this.state;
+        console.log('this.props', this.props);
+        const {price, title, qty} = this.props.product;
+        const {
+            product,
+            onDecreaseQuantity,
+            onIncreaseQuantity,
+            onDelete
+        } = this.props
 
         return (
             <div className="cart-item">
+                {this.props.jsx}
                 <div className="left-block">
                     <img style={styles.image}/>
                 </div>
@@ -34,11 +27,18 @@ class CartItem extends React.Component {
                         <img alt = "increase" 
                             className="action-icons" 
                             src="https://t3.ftcdn.net/jpg/03/30/25/74/240_F_330257485_WEd8LDmLkdp4vbJjhbLY263gV0OvsiIF.jpg"
-                            onClick={this.increaseQty}
+                            onClick={() => onIncreaseQuantity(product)}
                         />
                         
-                        <img alt = "decrease" className="action-icons" src="https://t3.ftcdn.net/jpg/05/15/52/52/240_F_515525211_uXgI3FdevK7Gr2DioeChvCHsPuvNb580.jpg"/>
-                        <img alt = "delete" className="action-icons" src="https://t4.ftcdn.net/jpg/01/90/89/15/240_F_190891550_N7uKp2aHE3mOc20dmtDytj7atgvbhdOu.jpg"/>
+                        <img alt = "decrease" 
+                            className="action-icons" 
+                            src="https://t3.ftcdn.net/jpg/05/15/52/52/240_F_515525211_uXgI3FdevK7Gr2DioeChvCHsPuvNb580.jpg"
+                            onClick={() => onDecreaseQuantity(product)}  
+                        />
+                        <img alt = "delete" 
+                            className="action-icons" 
+                            src="https://t4.ftcdn.net/jpg/01/90/89/15/240_F_190891550_N7uKp2aHE3mOc20dmtDytj7atgvbhdOu.jpg"
+                            onClick={() => onDelete(product.id)} />
                     </div>
                 </div>
             </div>
